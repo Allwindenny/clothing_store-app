@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results for "{{ keyword }}"</h1>
+    <p>{{ match_count }} item(s) matched your search.</p>
+    <ul>
+        {% if match_count > 0 %}
+            {% for result in results %}
+            <li>
+                <h3>{{ result['Clothes Title'] }}</h3>
+                <p>{{ result['Clothes Description'] }}</p>
+                <!-- Add a link to the add_review route for each item -->
+                <a href="{{ url_for('add_review', clothing_id=result['Clothing ID']) }}">Add Review</a>
+            </li>
+            {% endfor %}
+        {% else %}
+            <p>No results found for "{{ keyword }}". Try a different search term.</p>
+        {% endif %}
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

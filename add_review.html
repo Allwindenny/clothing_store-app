@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review for {{ clothing_item['Clothes Title'] }}</title>
+</head>
+<body>
+    <h1>Submit a Review for "{{ clothing_item['Clothes Title'] }}"</h1>
+    <p>{{ clothing_item['Clothes Description'] }}</p>
+
+    <form action="{{ url_for('add_review', clothing_id=clothing_item['Clothing ID']) }}" method="post">
+        <label for="review_title">Review Title:</label>
+        <input type="text" name="review_title" placeholder="Enter review title" required>
+        <br><br>
+
+        <label for="review_description">Review Description:</label>
+        <textarea name="review_description" rows="5" cols="40" placeholder="Enter review description..." required></textarea>
+        <br><br>
+
+        <!-- Rating Field -->
+        <label for="rating">Rating (1 to 5):</label>
+        <select name="rating" required>
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3">3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

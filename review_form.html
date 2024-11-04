@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Result</title>
+</head>
+<body>
+    <h1>Review Submitted</h1>
+    <p><strong>Review Text:</strong> {{ review_text }}</p>
+    <p><strong>Rating:</strong> {{ rating }} / 5</p>  <!-- Display the rating -->
+    <p><strong>Model Recommendation:</strong> {{ model_recommendation }}</p>
+
+    <!-- Allow the user to confirm or override the recommendation -->
+    <form action="{{ url_for('confirm_review') }}" method="post">
+        <label for="final_recommendation">Final Recommendation:</label>
+        <select name="final_recommendation">
+            <option value="Recommended" {% if model_recommendation == 'Recommended' %}selected{% endif %}>Recommended</option>
+            <option value="Not Recommended" {% if model_recommendation == 'Not Recommended' %}selected{% endif %}>Not Recommended</option>
+        </select>
+
+        <!-- Hidden inputs to pass data to the backend -->
+        <input type="hidden" name="review_text" value="{{ review_text }}">
+        <input type="hidden" name="clothing_id" value="{{ clothing_id }}">
+        <input type="hidden" name="rating" value="{{ rating }}">  <!-- Pass the rating -->
+
+        <br><br>
+        <button type="submit">Confirm Review</button>
+    </form>
+
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
